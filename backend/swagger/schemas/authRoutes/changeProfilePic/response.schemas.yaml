@@ -1,0 +1,14 @@
+ProfilePictureUpdateResponse:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      example: 200
+    data:
+      $ref: '#/components/schemas/ProfilePictureResponse'
+    message:
+      type: string
+      example: 'Profile picture updated'
+    success:
+      type: boolean
+      example: true

@@ -1,0 +1,22 @@
+UserResponse:
+  type: object
+  properties:
+    _id:
+      type: string
+      example: '65a1f2b3c4d5e6f7g8h9i0j'
+    email:
+      $ref: '#/components/schemas/Email'
+    name:
+      $ref: '#/components/schemas/Name'
+    userType:
+      type: string
+      enum: ['Student', 'Alumni', 'Admin']
+      example: 'Student'
+    profilePicture:
+      type: string
+      format: uri
+      nullable: true
+    isVerified:
+      type: boolean
+      example: false
+    # Add other fields based on your User model

@@ -1,0 +1,55 @@
+AlumniSignupResponse:
+  type: object
+  properties:
+    accessToken:
+      type: string
+      description: JWT access token
+      example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+    refreshToken:
+      type: string
+      description: JWT refresh token
+      example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+    user:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: '65a1f2b3c4d5e6f7g8h9i0j'
+        email:
+          $ref: '#/components/schemas/Email'
+        name:
+          $ref: '#/components/schemas/Name'
+        userType:
+          type: string
+          enum: ['Alumni']
+          example: 'Alumni'
+        graduationYear:
+          type: integer
+          example: 2020
+        isVerified:
+          type: boolean
+          example: false
+
+ErrorResponse:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      example: 400
+    message:
+      type: string
+      example: 'Validation failed'
+    errors:
+      type: array
+      items:
+        type: object
+        properties:
+          field:
+            type: string
+            example: 'email'
+          message:
+            type: string
+            example: 'Invalid email format'
+          code:
+            type: string
+            example: 'invalid_string'

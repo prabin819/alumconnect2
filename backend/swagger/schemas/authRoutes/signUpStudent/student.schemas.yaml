@@ -1,0 +1,50 @@
+# Student-specific schemas
+StudentSignupRequest:
+  type: object
+  required:
+    - email
+    - password
+    - name
+    - enrollmentYear
+    - expectedGraduationYear
+    - major
+    - studentId
+  properties:
+    email:
+      $ref: '#/components/schemas/Email'
+    password:
+      $ref: '#/components/schemas/Password'
+    name:
+      $ref: '#/components/schemas/Name'
+    enrollmentYear:
+      type: integer
+      description: Year of enrollment (must be ≤ current year)
+      example: 2022
+    expectedGraduationYear:
+      type: integer
+      description: Future graduation year (must be > enrollmentYear)
+      example: 2026
+    major:
+      type: string
+      minLength: 2
+      maxLength: 100
+      example: 'Computer Science'
+    studentId:
+      type: string
+      minLength: 3
+      maxLength: 20
+      pattern: "^[A-Za-z0-9\\-_]+$"
+      example: 'CS-2022-001'
+    profilePicture:
+      type: string
+      format: uri
+      description: Optional profile picture URL
+    bio:
+      type: string
+      maxLength: 500
+    interests:
+      type: array
+      items:
+        type: string
+        maxLength: 50
+      example: ['Web Development', 'AI']

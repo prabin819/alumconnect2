@@ -1,0 +1,41 @@
+UpdateAlumniRequest:
+  type: object
+  properties:
+    name:
+      $ref: '#/components/schemas/Name'
+    bio:
+      type: string
+      maxLength: 500
+      example: 'Experienced software engineer with 5+ years in web development'
+    isActive:
+      type: boolean
+      default: true
+    graduationYear:
+      $ref: '#/components/schemas/GraduationYear'
+    degree:
+      type: string
+      minLength: 2
+      maxLength: 100
+      example: 'Computer Science'
+    company:
+      type: string
+      maxLength: 100
+      example: 'Tech Corp'
+    position:
+      type: string
+      maxLength: 100
+      example: 'Senior Developer'
+    industry:
+      type: string
+      maxLength: 50
+      example: 'Information Technology'
+    linkedIn:
+      type: string
+      format: uri
+      example: 'https://linkedin.com/in/username'
+    skills:
+      type: array
+      items:
+        type: string
+        maxLength: 50
+      example: ['JavaScript', 'Node.js']

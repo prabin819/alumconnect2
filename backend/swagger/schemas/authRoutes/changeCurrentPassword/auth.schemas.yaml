@@ -1,0 +1,10 @@
+ChangePasswordRequest:
+  type: object
+  required:
+    - oldPassword
+    - newPassword
+  properties:
+    oldPassword:
+      $ref: '#/components/schemas/Password'
+    newPassword:
+      $ref: '#/components/schemas/Password'

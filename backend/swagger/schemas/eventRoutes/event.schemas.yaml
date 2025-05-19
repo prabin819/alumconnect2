@@ -1,0 +1,356 @@
+# /**
+#  * @swagger
+#  * components:
+#  *   schemas:
+#  *     Event:
+#  *       type: object
+#  *       properties:
+#  *         _id:
+#  *           type: string
+#  *           example: "507f1f77bcf86cd799439011"
+#  *         title:
+#  *           type: string
+#  *           example: "Annual Alumni Meet"
+#  *         description:
+#  *           type: string
+#  *           example: "Join us for our yearly alumni gathering"
+#  *         startDate:
+#  *           type: string
+#  *           format: date-time
+#  *           example: "2023-12-15T18:00:00.000Z"
+#  *         endDate:
+#  *           type: string
+#  *           format: date-time
+#  *           example: "2023-12-15T22:00:00.000Z"
+#  *         location:
+#  *           type: string
+#  *           example: "Campus Auditorium"
+#  *         isVirtual:
+#  *           type: boolean
+#  *           example: false
+#  *         meetingLink:
+#  *           type: string
+#  *           example: ""
+#  *         maxAttendees:
+#  *           type: integer
+#  *           example: 100
+#  *         category:
+#  *           type: string
+#  *           enum: [networking, workshop, seminar, social, conference, other]
+#  *           example: "social"
+#  *         imageUrl:
+#  *           type: string
+#  *           example: "https://example.com/event1.jpg"
+#  *         createdBy:
+#  *           type: object
+#  *           properties:
+#  *             id:
+#  *               type: string
+#  *               example: "507f1f77bcf86cd799439012"
+#  *             userType:
+#  *               type: string
+#  *               enum: [alumni, student]
+#  *               example: "alumni"
+#  *             name:
+#  *               type: string
+#  *               example: "John Doe"
+#  *         attendees:
+#  *           type: array
+#  *           items:
+#  *             type: object
+#  *             properties:
+#  *               userId:
+#  *                 type: string
+#  *                 example: "507f1f77bcf86cd799439013"
+#  *               userType:
+#  *                 type: string
+#  *                 enum: [alumni, student]
+#  *                 example: "student"
+#  *               registeredAt:
+#  *                 type: string
+#  *                 format: date-time
+#  *                 example: "2023-11-01T10:00:00.000Z"
+#  *               name:
+#  *                 type: string
+#  *                 example: "Jane Smith"
+#  *         isActive:
+#  *           type: boolean
+#  *           example: true
+#  *         createdAt:
+#  *           type: string
+#  *           format: date-time
+#  *         updatedAt:
+#  *           type: string
+#  *           format: date-time
+#  */
+
+Event:
+  type: object
+  properties:
+    _id:
+      type: string
+      example: '507f1f77bcf86cd799439011'
+    title:
+      type: string
+      example: 'Annual Alumni Meet'
+    description:
+      type: string
+      example: 'Join us for our yearly alumni gathering'
+    startDate:
+      type: string
+      format: date-time
+      example: '2023-12-15T18:00:00.000Z'
+    endDate:
+      type: string
+      format: date-time
+      example: '2023-12-15T22:00:00.000Z'
+    location:
+      type: string
+      example: 'Campus Auditorium'
+    isVirtual:
+      type: boolean
+      example: false
+    meetingLink:
+      type: string
+      example: ''
+    maxAttendees:
+      type: integer
+      example: 100
+    category:
+      type: string
+      enum: [networking, workshop, seminar, social, conference, other]
+      example: 'social'
+    imageUrl:
+      type: string
+      example: 'https://example.com/event1.jpg'
+    createdBy:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '507f1f77bcf86cd799439012'
+        userType:
+          type: string
+          enum: [alumni, student]
+          example: 'alumni'
+        name:
+          type: string
+          example: 'John Doe'
+    attendees:
+      type: array
+      items:
+        type: object
+        properties:
+          userId:
+            type: string
+            example: '507f1f77bcf86cd799439013'
+          userType:
+            type: string
+            enum: [alumni, student]
+            example: 'student'
+          registeredAt:
+            type: string
+            format: date-time
+            example: '2023-11-01T10:00:00.000Z'
+          name:
+            type: string
+            example: 'Jane Smith'
+    isActive:
+      type: boolean
+      example: true
+    createdAt:
+      type: string
+      format: date-time
+    updatedAt:
+      type: string
+      format: date-time
+
+# /**
+#  * @swagger
+#  * components:
+#  *   schemas:
+#  *     EventWithDetails:
+#  *       allOf:
+#  *         - $ref: '#/components/schemas/Event'
+#  *         - type: object
+#  *           properties:
+#  *             createdBy:
+#  *               type: object
+#  *               properties:
+#  *                 id:
+#  *                   type: string
+#  *                   example: "507f1f77bcf86cd799439012"
+#  *                 userType:
+#  *                   type: string
+#  *                   enum: [alumni, student]
+#  *                   example: "alumni"
+#  *                 name:
+#  *                   type: string
+#  *                   example: "John Doe"
+#  *                 email:
+#  *                   type: string
+#  *                   format: email
+#  *                   example: "john@example.com"
+#  *             attendees:
+#  *               type: array
+#  *               items:
+#  *                 type: object
+#  *                 properties:
+#  *                   userId:
+#  *                     type: string
+#  *                     example: "507f1f77bcf86cd799439013"
+#  *                   userType:
+#  *                     type: string
+#  *                     enum: [alumni, student]
+#  *                     example: "student"
+#  *                   registeredAt:
+#  *                     type: string
+#  *                     format: date-time
+#  *                     example: "2023-11-01T10:00:00.000Z"
+#  *                   name:
+#  *                     type: string
+#  *                     example: "Jane Smith"
+#  */
+
+EventWithDetails:
+  allOf:
+    - $ref: '#/components/schemas/Event'
+    - type: object
+      properties:
+        createdBy:
+          type: object
+          properties:
+            id:
+              type: string
+              example: '507f1f77bcf86cd799439012'
+            userType:
+              type: string
+              enum: [alumni, student]
+              example: 'alumni'
+            name:
+              type: string
+              example: 'John Doe'
+            email:
+              type: string
+              format: email
+              example: 'john@example.com'
+        attendees:
+          type: array
+          items:
+            type: object
+            properties:
+              userId:
+                type: string
+                example: '507f1f77bcf86cd799439013'
+              userType:
+                type: string
+                enum: [alumni, student]
+                example: 'student'
+              registeredAt:
+                type: string
+                format: date-time
+                example: '2023-11-01T10:00:00.000Z'
+              name:
+                type: string
+                example: 'Jane Smith'
+
+# /**
+#  * @swagger
+#  * components:
+#  *   schemas:
+#  *     UpdateEventInput:
+#  *       type: object
+#  *       properties:
+#  *         title:
+#  *           type: string
+#  *           minLength: 5
+#  *           maxLength: 100
+#  *           example: "Updated Alumni Meet"
+#  *         description:
+#  *           type: string
+#  *           minLength: 20
+#  *           example: "Updated description with new schedule"
+#  *         startDate:
+#  *           type: string
+#  *           format: date-time
+#  *           example: "2023-12-16T18:00:00Z"
+#  *         endDate:
+#  *           type: string
+#  *           format: date-time
+#  *           example: "2023-12-16T22:00:00Z"
+#  *         location:
+#  *           type: string
+#  *           minLength: 3
+#  *           example: "Updated Venue"
+#  *         isVirtual:
+#  *           type: boolean
+#  *           example: false
+#  *         meetingLink:
+#  *           type: string
+#  *           format: uri
+#  *           example: "https://new-meet.example.com/alumni-2023"
+#  *         maxAttendees:
+#  *           type: integer
+#  *           minimum: 1
+#  *           example: 150
+#  *         category:
+#  *           type: string
+#  *           enum: [networking, workshop, seminar, social, conference, other]
+#  *           example: "social"
+#  *         imageUrl:
+#  *           type: string
+#  *           format: uri
+#  *           example: "https://example.com/new-event-image.jpg"
+#  *         isActive:
+#  *           type: boolean
+#  *           description: Set event visibility status
+#  *           example: true
+#  */
+
+UpdateEventInput:
+  type: object
+  properties:
+    title:
+      type: string
+      minLength: 5
+      maxLength: 100
+      example: 'Updated Alumni Meet'
+    description:
+      type: string
+      minLength: 20
+      example: 'Updated description with new schedule'
+    startDate:
+      type: string
+      format: date-time
+      example: '2023-12-16T18:00:00Z'
+    endDate:
+      type: string
+      format: date-time
+      example: '2023-12-16T22:00:00Z'
+    location:
+      type: string
+      minLength: 3
+      example: 'Updated Venue'
+    isVirtual:
+      type: boolean
+      example: false
+    meetingLink:
+      type: string
+      format: uri
+      example: 'https://new-meet.example.com/alumni-2023'
+    maxAttendees:
+      type: integer
+      minimum: 1
+      example: 150
+    category:
+      type: string
+      enum: [networking, workshop, seminar, social, conference, other]
+      example: 'social'
+    imageUrl:
+      type: string
+      format: uri
+      example: 'https://example.com/new-event-image.jpg'
+    isActive:
+      type: boolean
+      description: Set event visibility status
+      example: true

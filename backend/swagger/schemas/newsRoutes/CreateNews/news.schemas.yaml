@@ -1,0 +1,39 @@
+CreateNewsRequest:
+  type: object
+  required:
+    - title
+    - content
+    - summary
+  properties:
+    title:
+      $ref: '#/components/schemas/Title'
+    content:
+      $ref: '#/components/schemas/Content'
+    summary:
+      $ref: '#/components/schemas/Summary'
+    imageUrl:
+      $ref: '#/components/schemas/ImageUrl'
+    tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      example: ['scholarship', 'computer-science']
+    category:
+      $ref: '#/components/schemas/Category'
+
+CreateNewsResponse:
+  type: object
+  properties:
+    _id:
+      type: string
+      example: '65a1f2b3c4d5e6f7g8h9i0j'
+    title:
+      $ref: '#/components/schemas/Title'
+    content:
+      $ref: '#/components/schemas/Content'
+    createdBy:
+      $ref: '#/components/schemas/Creator'
+    createdAt:
+      type: string
+      format: date-time
+      example: '2023-12-18T10:30:00Z'

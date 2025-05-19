@@ -1,0 +1,385 @@
+// Example usage of the auth services
+import React, { useState } from 'react';
+import { 
+  useAlumniSignup, 
+  useLogin, 
+  useChangePassword,
+  useUpdateAlumniAccount,
+  useForgotPassword
+} from '../services';
+import { useAuth } from '../contexts/AuthContext';
+
+// Alumni Signup Form Example
+export const AlumniSignupForm = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    graduationYear: '',
+    // Add more fields as needed
+  });
+  
+  const { signupAlumni, isLoading, error, isSuccess, reset } = useAlumniSignup();
+  
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signupAlumni(formData);
+      // Handle success - maybe redirect to login or show success message
+    } catch (err) {
+      // Error is already handled by the hook and available in the error state
+      console.error('Signup failed:', err);
+    }
+  };
+  
+  // Reset form if needed
+  const handleReset = () => {
+    setFormData({
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      graduationYear: '',
+    });
+    reset(); // Reset the API state
+  };
+  
+  return (
+    <form onSubmit={handleSubmit}>
+      {error && <div className="error">{error.message}</div>}
+      {isSuccess && <div className="success">Account created successfully! Please check your email to verify your account.</div>}
+      
+      <div>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      
+      {/* Add more form fields here */}
+      
+      <div>
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? 'Signing up...' : 'Sign Up'}
+      </button>
+      <button type="button" onClick={handleReset}>Reset</button>
+    </form>
+  );
+};
+
+// Login Form Example
+export const LoginForm = () => {
+  const [credentials, setCredentials] = useState({
+    email: '',
+    password: '',
+  });
+  
+  const { login, isLoading, error } = useLogin();
+  const { loginUser } = useAuth();
+  
+  const handleChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const userData = await login(credentials);
+      loginUser(userData); // Update Auth context
+      // Redirect user or show success message
+    } catch (err) {
+      // Error handled by hook
+    }
+  };
+  
+  return (
+    <form onSubmit={handleSubmit}>
+      {error && <div className="error">{error.message}</div>}
+      
+      <div>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={credentials.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      
+      <div>
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={credentials.password}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? 'Logging in...' : 'Log In'}
+      </button>
+    </form>
+  );
+};
+
+// Change Password Form Example
+export const ChangePasswordForm = () => {
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+  });
+  
+  const { changePassword, isLoading, error, isSuccess, reset } = useChangePassword();
+  
+  const handleChange = (e) => {
+    setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
+  };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      alert("New passwords don't match!");
+      return;
+    }
+    
+    try {
+      await changePassword({
+        currentPassword: passwordData.currentPassword,
+        newPassword: passwordData.newPassword,
+      });
+      // Clear form on success
+      setPasswordData({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: '',
+      });
+    } catch (err) {
+      // Error handled by hook
+    }
+  };
+  
+  return (
+    <form onSubmit={handleSubmit}>
+      {error && <div className="error">{error.message}</div>}
+      {isSuccess && <div className="success">Password changed successfully!</div>}
+      
+      <div>
+        <label htmlFor="currentPassword">Current Password</label>
+        <input
+          type="password"
+          id="currentPassword"
+          name="currentPassword"
+          value={passwordData.currentPassword}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      
+      <div>
+        <label htmlFor="newPassword">New Password</label>
+        <input
+          type="password"
+          id="newPassword"
+          name="newPassword"
+          value={passwordData.newPassword}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      
+      <div>
+        <label htmlFor="confirmPassword">Confirm New Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          value={passwordData.confirmPassword}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? 'Changing Password...' : 'Change Password'}
+      </button>
+    </form>
+  );
+};
+
+// Update Alumni Profile Example
+export const UpdateAlumniProfileForm = () => {
+  const { user, updateUser } = useAuth();
+  const [profileData, setProfileData] = useState({
+    firstName: user?.firstName || '',
+    lastName: user?.lastName || '',
+    graduationYear: user?.graduationYear || '',
+    company: user?.company || '',
+    jobTitle: user?.jobTitle || '',
+    bio: user?.bio || '',
+    profilePicture: null,
+  });
+  
+  const [previewUrl, setPreviewUrl] = useState(user?.profilePictureUrl || '');
+  
+  const { updateAccount, isLoading, error, isSuccess } = useUpdateAlumniAccount();
+  
+  const handleChange = (e) => {
+    if (e.target.name === 'profilePicture' && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      setProfileData({ ...profileData, profilePicture: file });
+      
+      // Create preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setProfileData({ ...profileData, [e.target.name]: e.target.value });
+    }
+  };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const updatedUser = await updateAccount(profileData);
+      updateUser(updatedUser); // Update user in context
+    } catch (err) {
+      // Error handled by hook
+    }
+  };
+  
+  return (
+    <form onSubmit={handleSubmit}>
+      {error && <div className="error">{error.message}</div>}
+      {isSuccess && <div className="success">Profile updated successfully!</div>}
+      
+      <div>
+        <label htmlFor="firstName">First Name</label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          value={profileData.firstName}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      
+      <div>
+        <label htmlFor="lastName">Last Name</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          value={profileData.lastName}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      
+      {/* Add more form fields */}
+      
+      <div>
+        <label htmlFor="profilePicture">Profile Picture</label>
+        <input
+          type="file"
+          id="profilePicture"
+          name="profilePicture"
+          accept="image/*"
+          onChange={handleChange}
+        />
+        {previewUrl && (
+          <div className="preview">
+            <img src={previewUrl} alt="Profile preview" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+          </div>
+        )}
+      </div>
+      
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? 'Updating Profile...' : 'Update Profile'}
+      </button>
+    </form>
+  );
+};
+
+// Forgot Password Form Example
+export const ForgotPasswordForm = () => {
+  const [email, setEmail] = useState('');
+  const { forgotPassword, isLoading, error, isSuccess, reset } = useForgotPassword();
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await forgotPassword(email);
+      // Success is handled by the hook's isSuccess state
+    } catch (err) {
+      // Error is handled by the hook
+    }
+  };
+  
+  // Reset form and state
+  const handleReset = () => {
+    setEmail('');
+    reset();
+  };
+  
+  return (
+    <form onSubmit={handleSubmit}>
+      {error && <div className="error">{error.message}</div>}
+      {isSuccess && (
+        <div className="success">
+          Password reset instructions have been sent to your email.
+          <button type="button" onClick={handleReset}>Send another request</button>
+        </div>
+      )}
+      
+      {!isSuccess && (
+        <>
+          <div>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Sending Request...' : 'Reset Password'}
+          </button>
+        </>
+      )}
+    </form>
+  );
+};

@@ -1,0 +1,157 @@
+# /**
+#  * @swagger
+#  * components:
+#  *   schemas:
+#  *     ContactInput:
+#  *       type: object
+#  *       required:
+#  *         - name
+#  *         - email
+#  *         - subject
+#  *         - message
+#  *       properties:
+#  *         name:
+#  *           type: string
+#  *           minLength: 2
+#  *           maxLength: 50
+#  *           example: "John Doe"
+#  *         email:
+#  *           type: string
+#  *           format: email
+#  *           example: "john@example.com"
+#  *         subject:
+#  *           type: string
+#  *           minLength: 5
+#  *           maxLength: 100
+#  *           example: "Question about alumni benefits"
+#  *         message:
+#  *           type: string
+#  *           minLength: 10
+#  *           maxLength: 1000
+#  *           example: "I would like to know more about the mentorship program"
+#  *
+#  *     Contact:
+#  *       type: object
+#  *       properties:
+#  *         _id:
+#  *           type: string
+#  *           example: "507f1f77bcf86cd799439011"
+#  *         name:
+#  *           type: string
+#  *           example: "John Doe"
+#  *         email:
+#  *           type: string
+#  *           example: "john@example.com"
+#  *         subject:
+#  *           type: string
+#  *           example: "Question about alumni benefits"
+#  *         message:
+#  *           type: string
+#  *           example: "I would like to know more about..."
+#  *         status:
+#  *           type: string
+#  *           enum: [New, In Progress, Resolved]
+#  *           example: "New"
+#  *         responded:
+#  *           type: boolean
+#  *           example: false
+#  *         response:
+#  *           type: string
+#  *           example: ""
+#  *         createdAt:
+#  *           type: string
+#  *           format: date-time
+#  *           example: "2023-07-15T10:00:00Z"
+#  */
+
+ContactInput:
+  type: object
+  required:
+    - name
+    - email
+    - subject
+    - message
+  properties:
+    name:
+      type: string
+      minLength: 2
+      maxLength: 50
+      example: 'John Doe'
+    email:
+      type: string
+      format: email
+      example: 'john@example.com'
+    subject:
+      type: string
+      minLength: 5
+      maxLength: 100
+      example: 'Question about alumni benefits'
+    message:
+      type: string
+      minLength: 10
+      maxLength: 1000
+      example: 'I would like to know more about the mentorship program'
+
+Contact:
+  type: object
+  properties:
+    _id:
+      type: string
+      example: '507f1f77bcf86cd799439011'
+    name:
+      type: string
+      example: 'John Doe'
+    email:
+      type: string
+      example: 'john@example.com'
+    subject:
+      type: string
+      example: 'Question about alumni benefits'
+    message:
+      type: string
+      example: 'I would like to know more about...'
+    status:
+      type: string
+      enum: [New, In Progress, Resolved]
+      example: 'New'
+    responded:
+      type: boolean
+      example: false
+    response:
+      type: string
+      example: ''
+    createdAt:
+      type: string
+      format: date-time
+      example: '2023-07-15T10:00:00Z'
+
+# /**
+#  * @swagger
+#  * components:
+#  *   schemas:
+#  *     UpdateContactStatusInput:
+#  *       type: object
+#  *       properties:
+#  *         status:
+#  *           type: string
+#  *           enum: [New, In Progress, Resolved]
+#  *           example: "In Progress"
+#  *         response:
+#  *           type: string
+#  *           example: "We're looking into your inquiry and will respond soon"
+#  *       required:
+#  *         - status
+#  */
+
+UpdateContactStatusInput:
+  type: object
+  properties:
+    status:
+      type: string
+      enum: [New, In Progress, Resolved]
+      example: 'In Progress'
+    response:
+      type: string
+      example: "We're looking into your inquiry and will respond soon"
+  required:
+    - status

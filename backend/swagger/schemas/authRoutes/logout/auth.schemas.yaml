@@ -1,0 +1,15 @@
+LogoutResponse:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      example: 200
+    message:
+      type: string
+      example: 'User logged out successfully.'
+    data:
+      type: object
+      example: {}
+    success:
+      type: boolean
+      example: true

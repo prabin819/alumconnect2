@@ -1,0 +1,34 @@
+UpdateNewsRequest:
+  type: object
+  properties:
+    title:
+      $ref: '#/components/schemas/Title'
+    content:
+      $ref: '#/components/schemas/Content'
+    summary:
+      $ref: '#/components/schemas/Summary'
+    imageUrl:
+      $ref: '#/components/schemas/ImageUrl'
+    tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      example: ['update', 'announcement']
+    category:
+      $ref: '#/components/schemas/Category'
+    isPublished:
+      type: boolean
+      example: true
+
+UpdateNewsResponse:
+  type: object
+  properties:
+    _id:
+      type: string
+      example: '65a1f2b3c4d5e6f7g8h9i0j'
+    title:
+      $ref: '#/components/schemas/Title'
+    updatedAt:
+      type: string
+      format: date-time
+      example: '2023-12-19T14:30:00Z'

@@ -1,0 +1,23 @@
+ForgotPasswordRequest:
+  type: object
+  required:
+    - email
+  properties:
+    email:
+      $ref: '#/components/schemas/Email'
+
+ForgotPasswordResponse:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      example: 200
+    data:
+      type: object
+      example: {}
+    message:
+      type: string
+      example: 'Email sent'
+    success:
+      type: boolean
+      example: true

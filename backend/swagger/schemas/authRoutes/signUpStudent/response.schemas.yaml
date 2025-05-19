@@ -1,0 +1,31 @@
+StudentSignupResponse:
+  type: object
+  properties:
+    accessToken:
+      type: string
+      example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+    refreshToken:
+      type: string
+      example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+    user:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: '65a1f2b3c4d5e6f7g8h9i0j'
+        email:
+          $ref: '#/components/schemas/Email'
+        name:
+          $ref: '#/components/schemas/Name'
+        userType:
+          type: string
+          enum: ['Student']
+        enrollmentYear:
+          type: integer
+          example: 2022
+        expectedGraduationYear:
+          type: integer
+          example: 2026
+        isVerified:
+          type: boolean
+          example: false

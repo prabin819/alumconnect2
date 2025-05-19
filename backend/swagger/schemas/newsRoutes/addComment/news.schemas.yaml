@@ -1,0 +1,31 @@
+CommentRequest:
+  type: object
+  required:
+    - text
+  properties:
+    text:
+      type: string
+      minLength: 1
+      maxLength: 1000
+      example: 'This is an insightful article!'
+
+CommentResponse:
+  type: object
+  properties:
+    _id:
+      type: string
+      example: '65a1f2b3c4d5e6f7g8h9i0k'
+    text:
+      type: string
+      example: 'This is an insightful article!'
+    name:
+      type: string
+      example: 'John Doe'
+    userType:
+      type: string
+      enum: ['alumni', 'student']
+      example: 'alumni'
+    createdAt:
+      type: string
+      format: date-time
+      example: '2023-12-20T10:30:00Z'

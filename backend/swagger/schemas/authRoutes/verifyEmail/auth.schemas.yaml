@@ -1,0 +1,15 @@
+VerifyEmailResponse:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      example: 200
+    data:
+      type: object
+      example: {}
+    message:
+      type: string
+      example: 'Email verification successful'
+    success:
+      type: boolean
+      example: true

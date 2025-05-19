@@ -1,0 +1,398 @@
+# /**
+#  * @swagger
+#  * components:
+#  *   schemas:
+#  *     Job:
+#  *       type: object
+#  *       properties:
+#  *         _id:
+#  *           type: string
+#  *           example: "5f8d04b3ab35de3a3427d9f3"
+#  *         title:
+#  *           type: string
+#  *           example: "Senior Software Engineer"
+#  *         description:
+#  *           type: string
+#  *           example: "Looking for an experienced software engineer..."
+#  *         company:
+#  *           type: string
+#  *           example: "Tech Corp"
+#  *         location:
+#  *           type: string
+#  *           example: "San Francisco, CA"
+#  *         jobType:
+#  *           type: string
+#  *           enum: [full-time, part-time, contract, internship]
+#  *           example: "full-time"
+#  *         salary:
+#  *           type: string
+#  *           example: "$120,000 - $150,000 per year"
+#  *         applicationDeadline:
+#  *           type: string
+#  *           format: date-time
+#  *           example: "2023-12-31T00:00:00.000Z"
+#  *         requirements:
+#  *           type: array
+#  *           items:
+#  *             type: string
+#  *           example: ["5+ years experience", "Node.js proficiency"]
+#  *         createdBy:
+#  *           $ref: '#/components/schemas/UserBasicInfo'
+#  *         isActive:
+#  *           type: boolean
+#  *           example: true
+#  *         createdAt:
+#  *           type: string
+#  *           format: date-time
+#  *         updatedAt:
+#  *           type: string
+#  *           format: date-time
+#  *
+#  *     UserBasicInfo:
+#  *       type: object
+#  *       properties:
+#  *         _id:
+#  *           type: string
+#  *           example: "5f8d04b3ab35de3a3427d9f3"
+#  *         name:
+#  *           type: string
+#  *           example: "John Doe"
+#  *         company:
+#  *           type: string
+#  *           example: "Tech Corp"
+#  *         position:
+#  *           type: string
+#  *           example: "CTO"
+#  *         email:
+#  *           type: string
+#  *           example: "john@techcorp.com"
+#  *         linkedIn:
+#  *           type: string
+#  *           example: "https://linkedin.com/in/johndoe"
+#  *
+#  *     ApiError:
+#  *       type: object
+#  *       properties:
+#  *         statusCode:
+#  *           type: integer
+#  *         message:
+#  *           type: string
+#  *         success:
+#  *           type: boolean
+#  *
+#  *   securitySchemes:
+#  *     bearerAuth:
+#  *       type: http
+#  *       scheme: bearer
+#  *       bearerFormat: JWT
+#  */
+
+Job:
+  type: object
+  properties:
+    _id:
+      type: string
+      example: '5f8d04b3ab35de3a3427d9f3'
+    title:
+      type: string
+      example: 'Senior Software Engineer'
+    description:
+      type: string
+      example: 'Looking for an experienced software engineer...'
+    company:
+      type: string
+      example: 'Tech Corp'
+    location:
+      type: string
+      example: 'San Francisco, CA'
+    jobType:
+      type: string
+      enum: [full-time, part-time, contract, internship]
+      example: 'full-time'
+    salary:
+      type: string
+      example: '$120,000 - $150,000 per year'
+    applicationDeadline:
+      type: string
+      format: date-time
+      example: '2023-12-31T00:00:00.000Z'
+    requirements:
+      type: array
+      items:
+        type: string
+      example:
+        - '5+ years experience'
+        - 'Node.js proficiency'
+    createdBy:
+      $ref: '#/components/schemas/UserBasicInfo'
+    isActive:
+      type: boolean
+      example: true
+    createdAt:
+      type: string
+      format: date-time
+    updatedAt:
+      type: string
+      format: date-time
+
+UserBasicInfo:
+  type: object
+  properties:
+    _id:
+      type: string
+      example: '5f8d04b3ab35de3a3427d9f3'
+    name:
+      type: string
+      example: 'John Doe'
+    company:
+      type: string
+      example: 'Tech Corp'
+    position:
+      type: string
+      example: 'CTO'
+    email:
+      type: string
+      example: 'john@techcorp.com'
+    linkedIn:
+      type: string
+      example: 'https://linkedin.com/in/johndoe'
+
+ApiError:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+    message:
+      type: string
+    success:
+      type: boolean
+
+securitySchemes:
+  bearerAuth:
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+
+# /**
+#  * @swagger
+#  * components:
+#  *   schemas:
+#  *     CreateJobInput:
+#  *       type: object
+#  *       required:
+#  *         - title
+#  *         - description
+#  *         - company
+#  *         - location
+#  *         - jobType
+#  *         - applicationDeadline
+#  *       properties:
+#  *         title:
+#  *           type: string
+#  *           minLength: 5
+#  *           maxLength: 100
+#  *           example: "Senior Software Engineer"
+#  *         description:
+#  *           type: string
+#  *           minLength: 20
+#  *           example: "Looking for an experienced engineer with Node.js skills..."
+#  *         company:
+#  *           type: string
+#  *           minLength: 2
+#  *           maxLength: 50
+#  *           example: "Tech Innovations Inc."
+#  *         location:
+#  *           type: string
+#  *           minLength: 3
+#  *           maxLength: 100
+#  *           example: "Remote, US"
+#  *         jobType:
+#  *           type: string
+#  *           enum: [full-time, part-time, contract, internship]
+#  *           example: "full-time"
+#  *         salary:
+#  *           type: string
+#  *           maxLength: 50
+#  *           example: "$120,000 - $150,000 per year"
+#  *         applicationDeadline:
+#  *           type: string
+#  *           format: date-time
+#  *           description: Must be a future date
+#  *           example: "2023-12-31T00:00:00.000Z"
+#  *         requirements:
+#  *           type: array
+#  *           items:
+#  *             type: string
+#  *             maxLength: 100
+#  *           example: ["5+ years experience", "Node.js proficiency"]
+#  *         applicationLink:
+#  *           type: string
+#  *           format: uri
+#  *           maxLength: 255
+#  *           example: "https://company.com/careers/123"
+#  */
+
+CreateJobInput:
+  type: object
+  required:
+    - title
+    - description
+    - company
+    - location
+    - jobType
+    - applicationDeadline
+  properties:
+    title:
+      type: string
+      minLength: 5
+      maxLength: 100
+      example: 'Senior Software Engineer'
+    description:
+      type: string
+      minLength: 20
+      example: 'Looking for an experienced engineer with Node.js skills...'
+    company:
+      type: string
+      minLength: 2
+      maxLength: 50
+      example: 'Tech Innovations Inc.'
+    location:
+      type: string
+      minLength: 3
+      maxLength: 100
+      example: 'Remote, US'
+    jobType:
+      type: string
+      enum: [full-time, part-time, contract, internship]
+      example: 'full-time'
+    salary:
+      type: string
+      maxLength: 50
+      example: '$120,000 - $150,000 per year'
+    applicationDeadline:
+      type: string
+      format: date-time
+      description: Must be a future date
+      example: '2023-12-31T00:00:00.000Z'
+    requirements:
+      type: array
+      items:
+        type: string
+        maxLength: 100
+      example:
+        - '5+ years experience'
+        - 'Node.js proficiency'
+    applicationLink:
+      type: string
+      format: uri
+      maxLength: 255
+      example: 'https://company.com/careers/123'
+
+# /**
+#  * @swagger
+#  * components:
+#  *   schemas:
+#  *     UpdateJobInput:
+#  *       type: object
+#  *       properties:
+#  *         title:
+#  *           type: string
+#  *           minLength: 5
+#  *           maxLength: 100
+#  *           example: "Updated Senior Software Engineer Position"
+#  *         description:
+#  *           type: string
+#  *           minLength: 20
+#  *           example: "Updated description with new requirements..."
+#  *         company:
+#  *           type: string
+#  *           minLength: 2
+#  *           maxLength: 50
+#  *           example: "Updated Tech Corp"
+#  *         location:
+#  *           type: string
+#  *           minLength: 3
+#  *           maxLength: 100
+#  *           example: "Remote, Worldwide"
+#  *         jobType:
+#  *           type: string
+#  *           enum: [full-time, part-time, contract, internship]
+#  *           example: "contract"
+#  *         salary:
+#  *           type: string
+#  *           maxLength: 50
+#  *           example: "$100 - $150 per hour"
+#  *         applicationDeadline:
+#  *           type: string
+#  *           format: date-time
+#  *           description: Must be a future date
+#  *           example: "2023-12-15T00:00:00.000Z"
+#  *         requirements:
+#  *           type: array
+#  *           items:
+#  *             type: string
+#  *             maxLength: 100
+#  *           example: ["3+ years experience", "React expertise"]
+#  *         applicationLink:
+#  *           type: string
+#  *           format: uri
+#  *           maxLength: 255
+#  *           example: "https://updated-company.com/careers/456"
+#  *         isActive:
+#  *           type: boolean
+#  *           description: Whether the job posting should be visible
+#  *           example: true
+#  */
+
+UpdateJobInput:
+  type: object
+  properties:
+    title:
+      type: string
+      minLength: 5
+      maxLength: 100
+      example: 'Updated Senior Software Engineer Position'
+    description:
+      type: string
+      minLength: 20
+      example: 'Updated description with new requirements...'
+    company:
+      type: string
+      minLength: 2
+      maxLength: 50
+      example: 'Updated Tech Corp'
+    location:
+      type: string
+      minLength: 3
+      maxLength: 100
+      example: 'Remote, Worldwide'
+    jobType:
+      type: string
+      enum: [full-time, part-time, contract, internship]
+      example: 'contract'
+    salary:
+      type: string
+      maxLength: 50
+      example: '$100 - $150 per hour'
+    applicationDeadline:
+      type: string
+      format: date-time
+      description: Must be a future date
+      example: '2023-12-15T00:00:00.000Z'
+    requirements:
+      type: array
+      items:
+        type: string
+        maxLength: 100
+      example:
+        - '3+ years experience'
+        - 'React expertise'
+    applicationLink:
+      type: string
+      format: uri
+      maxLength: 255
+      example: 'https://updated-company.com/careers/456'
+    isActive:
+      type: boolean
+      description: Whether the job posting should be visible
+      example: true

@@ -1,0 +1,14 @@
+DeleteProfilePictureResponse:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      example: 200
+    data:
+      type: null
+    message:
+      type: string
+      example: 'Profile picture deleted successfully'
+    success:
+      type: boolean
+      example: true

@@ -1,0 +1,14 @@
+TokenRefreshResponse:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      example: 200
+    data:
+      $ref: '#/components/schemas/RefreshTokenResponse'
+    message:
+      type: string
+      example: 'Access token refreshed successfully'
+    success:
+      type: boolean
+      example: true

@@ -1,0 +1,17 @@
+CurrentUserResponse:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      example: 200
+    data:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserResponse'
+    message:
+      type: string
+      example: 'Current user fetched successfully'
+    success:
+      type: boolean
+      example: true

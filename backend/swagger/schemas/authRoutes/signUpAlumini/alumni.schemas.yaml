@@ -1,0 +1,44 @@
+# Alumni-specific schemas
+AlumniSignupRequest:
+  type: object
+  required:
+    - email
+    - password
+    - name
+    - graduationYear
+    - degree
+  properties:
+    email:
+      $ref: '#/components/schemas/Email'
+    password:
+      $ref: '#/components/schemas/Password'
+    name:
+      $ref: '#/components/schemas/Name'
+    graduationYear:
+      type: integer
+      description: Year of graduation (must be ≥ 1900 and ≤ current year + 5)
+      example: 2020
+    degree:
+      type: string
+      minLength: 2
+      maxLength: 100
+      example: 'Computer Science'
+    profilePicture:
+      type: string
+      format: uri
+      description: Optional URL to profile picture
+      example: 'https://example.com/profile.jpg'
+    bio:
+      type: string
+      maxLength: 500
+      description: Optional short bio
+    company:
+      type: string
+      maxLength: 100
+      example: 'Tech Corp'
+    skills:
+      type: array
+      items:
+        type: string
+        maxLength: 50
+      example: ['JavaScript', 'React']

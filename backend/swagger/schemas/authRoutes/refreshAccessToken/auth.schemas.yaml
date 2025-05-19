@@ -1,0 +1,17 @@
+RefreshTokenRequest:
+  type: object
+  properties:
+    refreshToken:
+      type: string
+      description: Required if not in cookies
+      example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+
+RefreshTokenResponse:
+  type: object
+  properties:
+    accessToken:
+      type: string
+      example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+    refreshToken:
+      type: string
+      example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'

@@ -1,0 +1,7 @@
+ProfilePictureResponse:
+  type: object
+  properties:
+    path:
+      type: string
+      format: uri
+      example: '/uploads/123456789-profilePicture.jpg'

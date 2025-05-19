@@ -1,0 +1,4 @@
+UserNewsResponse:
+  type: array
+  items:
+    $ref: '#/components/schemas/NewsResponse' # Reuse your existing NewsResponse schema

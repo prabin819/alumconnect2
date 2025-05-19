@@ -1,0 +1,309 @@
+# /**
+#  * @swagger
+#  * components:
+#  *   schemas:
+#  *     News:
+#  *       type: object
+#  *       properties:
+#  *         _id:
+#  *           type: string
+#  *           example: "507f1f77bcf86cd799439011"
+#  *         title:
+#  *           type: string
+#  *           example: "Annual Alumni Meet 2023"
+#  *         content:
+#  *           type: string
+#  *           example: "Full content of the news article..."
+#  *         summary:
+#  *           type: string
+#  *           maxLength: 300
+#  *           example: "Summary of the news article in brief"
+#  *         imageUrl:
+#  *           type: string
+#  *           example: "https://example.com/news1.jpg"
+#  *         tags:
+#  *           type: array
+#  *           items:
+#  *             type: string
+#  *           example: ["alumni", "event"]
+#  *         category:
+#  *           type: string
+#  *           enum: [academic, career, announcement, achievement, general]
+#  *           example: "announcement"
+#  *         createdBy:
+#  *           type: object
+#  *           properties:
+#  *             id:
+#  *               type: string
+#  *               example: "507f1f77bcf86cd799439012"
+#  *             userType:
+#  *               type: string
+#  *               enum: [alumni, student]
+#  *               example: "alumni"
+#  *             name:
+#  *               type: string
+#  *               example: "John Doe"
+#  *         isPublished:
+#  *           type: boolean
+#  *           example: true
+#  *         viewCount:
+#  *           type: integer
+#  *           example: 150
+#  *         likes:
+#  *           type: array
+#  *           items:
+#  *             type: object
+#  *             properties:
+#  *               userId:
+#  *                 type: string
+#  *                 example: "507f1f77bcf86cd799439013"
+#  *               addedAt:
+#  *                 type: string
+#  *                 format: date-time
+#  *                 example: "2023-07-15T10:00:00Z"
+#  *         comments:
+#  *           type: array
+#  *           items:
+#  *             type: object
+#  *             properties:
+#  *               commentId:
+#  *                 type: string
+#  *                 example: "507f1f77bcf86cd799439014"
+#  *         createdAt:
+#  *           type: string
+#  *           format: date-time
+#  *         updatedAt:
+#  *           type: string
+#  *           format: date-time
+#  */
+
+News:
+  type: object
+  properties:
+    _id:
+      type: string
+      example: '507f1f77bcf86cd799439011'
+    title:
+      type: string
+      example: 'Annual Alumni Meet 2023'
+    content:
+      type: string
+      example: 'Full content of the news article...'
+    summary:
+      type: string
+      maxLength: 300
+      example: 'Summary of the news article in brief'
+    imageUrl:
+      type: string
+      example: 'https://example.com/news1.jpg'
+    tags:
+      type: array
+      items:
+        type: string
+      example: ['alumni', 'event']
+    category:
+      type: string
+      enum: [academic, career, announcement, achievement, general]
+      example: 'announcement'
+    createdBy:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '507f1f77bcf86cd799439012'
+        userType:
+          type: string
+          enum: [alumni, student]
+          example: 'alumni'
+        name:
+          type: string
+          example: 'John Doe'
+    isPublished:
+      type: boolean
+      example: true
+    viewCount:
+      type: integer
+      example: 150
+    likes:
+      type: array
+      items:
+        type: object
+        properties:
+          userId:
+            type: string
+            example: '507f1f77bcf86cd799439013'
+          addedAt:
+            type: string
+            format: date-time
+            example: '2023-07-15T10:00:00Z'
+    comments:
+      type: array
+      items:
+        type: object
+        properties:
+          commentId:
+            type: string
+            example: '507f1f77bcf86cd799439014'
+    createdAt:
+      type: string
+      format: date-time
+    updatedAt:
+      type: string
+      format: date-time
+
+# Reusable component schemas (reference these with $ref)
+Title:
+  type: string
+  minLength: 5
+  maxLength: 200
+  example: 'New Scholarship Program Announcement'
+
+Content:
+  type: string
+  minLength: 50
+  maxLength: 10000
+  example: 'The university is pleased to announce...'
+
+Summary:
+  type: string
+  maxLength: 300
+  example: 'New scholarship opportunities for CS students'
+
+ImageUrl:
+  type: string
+  format: uri
+  example: 'https://example.com/news/scholarship.jpg'
+
+Category:
+  type: string
+  enum: ['academic', 'career', 'announcement', 'achievement', 'general']
+  example: 'academic'
+
+Creator:
+  type: object
+  properties:
+    id:
+      type: string
+      example: '65a1f2b3c4d5e6f7g8h9i0j'
+    name:
+      type: string
+      example: 'John Doe'
+    userType:
+      type: string
+      enum: ['alumni', 'student', 'admin']
+      example: 'admin'
+
+Like:
+  type: object
+  properties:
+    userId:
+      type: string
+      example: '65a1f2b3c4d5e6f7g8h9i0k'
+    addedAt:
+      type: string
+      format: date-time
+      example: '2023-12-15T10:30:00Z'
+
+# /**
+#  * @swagger
+#  * components:
+#  *   securitySchemes:
+#  *     CookieAuth:
+#  *       type: apiKey
+#  *       in: cookie
+#  *       name: accessToken
+#  *     BearerAuth:
+#  *       type: http
+#  *       scheme: bearer
+#  *       bearerFormat: JWT
+#  *   schemas:
+#  *     ApiResponse:
+#  *       type: object
+#  *       properties:
+#  *         statusCode:
+#  *           type: integer
+#  *         data:
+#  *           type: object
+#  *           nullable: true
+#  *         message:
+#  *           type: string
+#  *         success:
+#  *           type: boolean
+#  *     ApiError:
+#  *       type: object
+#  *       properties:
+#  *         statusCode:
+#  *           type: integer
+#  *         data:
+#  *           type: object
+#  *           nullable: true
+#  *         message:
+#  *           type: string
+#  *         success:
+#  *           type: boolean
+#  *         errors:
+#  *           type: array
+#  *           items:
+#  *             type: string
+#  */
+
+securitySchemes:
+  CookieAuth:
+    type: apiKey
+    in: cookie
+    name: accessToken
+    description: Authentication using access token stored in cookies.
+  BearerAuth:
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+    description: Bearer token authentication using JWT.
+
+schemas:
+  ApiResponse:
+    type: object
+    description: Standard API success response format.
+    properties:
+      statusCode:
+        type: integer
+        description: HTTP status code of the response.
+        example: 200
+      data:
+        type: object
+        nullable: true
+        description: The actual payload or response data.
+      message:
+        type: string
+        description: Human-readable message explaining the result.
+        example: 'Operation successful'
+      success:
+        type: boolean
+        description: Indicates if the operation was successful.
+        example: true
+
+  ApiError:
+    type: object
+    description: Standard API error response format.
+    properties:
+      statusCode:
+        type: integer
+        description: HTTP status code indicating the error.
+        example: 400
+      data:
+        type: object
+        nullable: true
+        description: Optional data associated with the error.
+      message:
+        type: string
+        description: Summary of the error.
+        example: 'Validation failed'
+      success:
+        type: boolean
+        description: Always false in case of errors.
+        example: false
+      errors:
+        type: array
+        description: List of detailed error messages.
+        items:
+          type: string
+          example: 'Email field is required'

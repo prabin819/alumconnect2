@@ -1,0 +1,14 @@
+UpdateStudentResponse:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      example: 200
+    data:
+      $ref: '#/components/schemas/StudentResponse' # Reuse your existing Student response schema
+    message:
+      type: string
+      example: 'Account details updated successfully'
+    success:
+      type: boolean
+      example: true

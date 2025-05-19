@@ -1,0 +1,15 @@
+DeleteUserResponse:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      example: 204
+    data:
+      type: object
+      example: {}
+    message:
+      type: string
+      example: 'User deleted successfully'
+    success:
+      type: boolean
+      example: true

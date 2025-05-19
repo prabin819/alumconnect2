@@ -1,0 +1,36 @@
+NewsResponse:
+  type: object
+  properties:
+    _id:
+      type: string
+      example: '65a1f2b3c4d5e6f7g8h9i0j'
+    title:
+      $ref: '#/components/schemas/Title'
+    content:
+      $ref: '#/components/schemas/Content'
+    summary:
+      $ref: '#/components/schemas/Summary'
+    imageUrl:
+      $ref: '#/components/schemas/ImageUrl'
+    category:
+      $ref: '#/components/schemas/Category'
+    viewCount:
+      type: integer
+      example: 150
+    likes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Like'
+    createdBy:
+      $ref: '#/components/schemas/Creator'
+    createdAt:
+      type: string
+      format: date-time
+    updatedAt:
+      type: string
+      format: date-time
+
+NewsListResponse:
+  type: array
+  items:
+    $ref: '#/components/schemas/NewsResponse'

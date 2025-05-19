@@ -1,0 +1,12 @@
+ErrorResponse:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      example: 401
+    message:
+      type: string
+      example: 'Unauthorized request'
+    errors:
+      type: array
+      items: {}

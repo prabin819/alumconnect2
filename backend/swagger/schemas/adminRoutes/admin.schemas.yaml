@@ -1,0 +1,178 @@
+# /**
+#  * @swagger
+#  * components:
+#  *   schemas:
+#  *     CreateUserInput:
+#  *       type: object
+#  *       required:
+#  *         - email
+#  *         - password
+#  *         - name
+#  *       properties:
+#  *         email:
+#  *           type: string
+#  *           format: email
+#  *           example: "admin@example.com"
+#  *         password:
+#  *           type: string
+#  *           minLength: 8
+#  *           example: "securePassword123"
+#  *         name:
+#  *           type: string
+#  *           minLength: 2
+#  *           example: "Admin User"
+#  *
+#  *     User:
+#  *       type: object
+#  *       properties:
+#  *         _id:
+#  *           type: string
+#  *           example: "507f1f77bcf86cd799439011"
+#  *         email:
+#  *           type: string
+#  *           example: "admin@example.com"
+#  *         name:
+#  *           type: string
+#  *           example: "Admin User"
+#  *         userType:
+#  *           type: string
+#  *           enum: [Admin, Alumni, Student]
+#  *           example: "Admin"
+#  *         isVerified:
+#  *           type: boolean
+#  *           example: false
+#  *         createdAt:
+#  *           type: string
+#  *           format: date-time
+#  *           example: "2023-07-15T10:00:00Z"
+#  *         updatedAt:
+#  *           type: string
+#  *           format: date-time
+#  *           example: "2023-07-15T10:00:00Z"
+#  */
+
+components:
+  schemas:
+    CreateUserInput:
+      type: object
+      required:
+        - email
+        - password
+        - name
+      properties:
+        email:
+          type: string
+          format: email
+          example: 'admin@example.com'
+        password:
+          type: string
+          minLength: 8
+          example: 'securePassword123'
+        name:
+          type: string
+          minLength: 2
+          example: 'Admin User'
+
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: '507f1f77bcf86cd799439011'
+        email:
+          type: string
+          example: 'admin@example.com'
+        name:
+          type: string
+          example: 'Admin User'
+        userType:
+          type: string
+          enum: [Admin, Alumni, Student]
+          example: 'Admin'
+        isVerified:
+          type: boolean
+          example: false
+        createdAt:
+          type: string
+          format: date-time
+          example: '2023-07-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2023-07-15T10:00:00Z'
+# /**
+#  * @swagger
+#  * components:
+#  *   schemas:
+#  *     UserDetails:
+#  *       type: object
+#  *       properties:
+#  *         _id:
+#  *           type: string
+#  *           example: "507f1f77bcf86cd799439011"
+#  *         email:
+#  *           type: string
+#  *           example: "user@example.com"
+#  *         name:
+#  *           type: string
+#  *           example: "John Doe"
+#  *         userType:
+#  *           type: string
+#  *           enum: [Admin, Alumni, Student]
+#  *           example: "Alumni"
+#  *         profilePicture:
+#  *           type: string
+#  *           example: "https://example.com/profile.jpg"
+#  *         bio:
+#  *           type: string
+#  *           example: "Alumni from 2015, currently working at Tech Corp"
+#  *         isVerified:
+#  *           type: boolean
+#  *           example: true
+#  *         createdAt:
+#  *           type: string
+#  *           format: date-time
+#  *           example: "2023-01-15T10:00:00Z"
+#  *         updatedAt:
+#  *           type: string
+#  *           format: date-time
+#  *           example: "2023-06-20T15:30:00Z"
+#  *       description: Full user details (excluding sensitive fields like password)
+#  */
+
+components:
+  schemas:
+    UserDetails:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: "507f1f77bcf86cd799439011"
+        email:
+          type: string
+          example: "user@example.com"
+        name:
+          type: string
+          example: "John Doe"
+        userType:
+          type: string
+          enum: [Admin, Alumni, Student]
+          example: "Alumni"
+        profilePicture:
+          type: string
+          example: "https://example.com/profile.jpg"
+        bio:
+          type: string
+          example: "Alumni from 2015, currently working at Tech Corp"
+        isVerified:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-01-15T10:00:00Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2023-06-20T15:30:00Z"
+      description: Full user details (excluding sensitive fields like password)

@@ -1,0 +1,15 @@
+ResendVerificationResponse:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      example: 200
+    data:
+      type: object
+      example: {}
+    message:
+      type: string
+      example: 'Verification email sent'
+    success:
+      type: boolean
+      example: true

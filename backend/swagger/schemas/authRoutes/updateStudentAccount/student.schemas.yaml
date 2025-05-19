@@ -1,0 +1,37 @@
+UpdateStudentRequest:
+  type: object
+  properties:
+    name:
+      $ref: '#/components/schemas/Name'
+    bio:
+      type: string
+      maxLength: 500
+      example: 'Computer Science student passionate about AI'
+    isActive:
+      type: boolean
+      default: true
+    enrollmentYear:
+      type: integer
+      minimum: 2000
+      maximum: 2024
+      example: 2022
+    expectedGraduationYear:
+      type: integer
+      minimum: 2024
+      maximum: 2030
+      example: 2026
+    major:
+      type: string
+      minLength: 2
+      maxLength: 100
+      example: 'Computer Science'
+    studentId:
+      type: string
+      pattern: "^[A-Za-z0-9\\-_]+$"
+      example: 'CS-2022-001'
+    interests:
+      type: array
+      items:
+        type: string
+        maxLength: 50
+      example: ['Machine Learning', 'Web Development']

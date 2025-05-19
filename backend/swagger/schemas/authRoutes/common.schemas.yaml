@@ -1,0 +1,13 @@
+Email:
+  type: string
+  format: email
+  example: 'user@example.com'
+Password:
+  type: string
+  minLength: 8
+  example: 'SecurePassword123!'
+Name:
+  type: string
+  minLength: 2
+  maxLength: 100
+  example: 'John Doe'
