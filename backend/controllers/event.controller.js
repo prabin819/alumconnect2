@@ -276,6 +276,8 @@ const updateEvent = asyncHandler(async (req, res, next) => {
     isActive,
   } = result.data;
 
+  const updatedImageUrl = req.file ? req.file.path.replace(/^public[\\/]/, '') : event.imageUrl;
+
   const updatedEvent = await Event.findByIdAndUpdate(
     req.params.id,
     {
@@ -288,7 +290,7 @@ const updateEvent = asyncHandler(async (req, res, next) => {
       meetingLink,
       maxAttendees,
       category,
-      imageUrl: req.file?.path.replace(/^public[\\/]/, ''),
+      imageUrl: updatedImageUrl,
       isActive,
     },
     { new: true }

@@ -154,13 +154,15 @@ const updateNews = asyncHandler(async (req, res, next) => {
 
   // const { title, content, summary, tags, category, isPublished = true } = req.body;
 
+  const updatedImageUrl = req.file ? req.file.path.replace(/^public[\\/]/, '') : news.imageUrl;
+
   const updatedNews = await News.findByIdAndUpdate(
     req.params.id,
     {
       title,
       content,
       summary,
-      imageUrl: req.file?.path.replace(/^public[\\/]/, ''),
+      imageUrl: updatedImageUrl,
       tags,
       category,
       isPublished,
